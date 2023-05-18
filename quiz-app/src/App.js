@@ -19,7 +19,7 @@ function App() {
         [
         { text: 'Тихий', isCorrect: true },
         { text: 'Індійський', isCorrect: false },
-        { text: 'Атлантичний', isCorrect: true },
+        { text: 'Атлантичний', isCorrect: false },
         ]
       },
       {

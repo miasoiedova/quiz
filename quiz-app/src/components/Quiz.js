@@ -3,29 +3,36 @@ import Question from "./Question";
 import Result from "./Result";
 
 const Quiz = ({ questions }) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [activeQuestion, setActiveQuestion] = useState(0);
   const [score, setScore] = useState(0);
 
   const handleAnswer = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1);
     }
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    // if(activeQuestion !== 0) {
+    //     setActiveQuestion((prevIndex) => prevIndex + 1);
+    // }
   };
 
-  const isQuizFinished = currentQuestionIndex === questions.length;
+  const onClickNext = () => {
+    setActiveQuestion((prevIndex) => prevIndex + 1);
+  }
+
+  const isQuizFinished = activeQuestion === questions.length;
 
   return (
-    <div>
+    <div className="main">
       {isQuizFinished ? (
-        <Result score={score} totalQuestions={questions.length} />
+        <Result score={score} />
       ) : (
         <Question
-          question={questions[currentQuestionIndex].question}
-          answers={questions[currentQuestionIndex].answers}
+          question={questions[activeQuestion].question}
+          answers={questions[activeQuestion].answers}
           handleAnswer={handleAnswer}
         />
       )}
+      <button onClick={onClickNext} className="next">Next</button>
     </div>
   );
 };
